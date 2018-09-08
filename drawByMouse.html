@@ -12,14 +12,14 @@
     c.onmousedown = function (ev) {
         var ev = ev || window.event;
         context.moveTo(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop);
-        document.onmousemove = function (ev) {
+        c.onmousemove = function (ev) {
             var ev = ev || window.event;
             context.lineTo(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop);
             context.stroke();
         };
-        document.onmouseup = function () {
-            document.onmousemove = null;
-            document.onmouseup = null;
+        c.onmouseup = function () {
+            c.onmousemove = null;
+            c.onmouseup = null;
         };
     };
 </script>
