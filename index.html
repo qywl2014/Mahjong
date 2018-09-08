@@ -1,16 +1,61 @@
 <!DOCTYPE>
 <html>
 
-<head></head>
+<head>
+    <script type="text/javascript" src="js/Util.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
 
 <body>
-    <canvas id="myCanvas" style="border:1px solid #d3d3d3;"></canvas>
+    <canvas id="myCanvas" width="1000px" height="500px" style="border:1px solid #d3d3d3;"></canvas>
 </body>
 <script>
-    let mc = document.getElementById("myCanvas");
-    let ctx = mc.getContext("2d");
-    ctx.rect(20, 20, 150, 100);
-    ctx.stroke();
+    let c = document.getElementById("myCanvas");
+    c.width = document.documentElement.clientWidth;
+    c.height = document.documentElement.clientHeight;
+    let context = c.getContext("2d");
+    U.setContext(context);
+    let rectArray = new Array();
+    let xInit = 80;
+    let yInit = c.height - 200;
+    for (let i = 0; i < 13; i++) {
+        let r = U.strokeRect(xInit, yInit, 80, 100);
+        xInit = xInit + 85;
+        rectArray.push(r);
+    }
+    c.onmousedown = function (e1) {
+        var e1 = e1 || window.event;
+        let x = e1.clientX - c.offsetLeft;
+        let y = e1.clientY - c.offsetTop;
+        for (let i = 0; i < rectArray.length; i++) {
+            let rect = rectArray[i];
+            let xRect = rect.x;
+            let yRect = rect.y;
+            let ifIn = x > rect.x && x < (rect.x + rect.width) && y > rect.y && y < (rect.y + rect.height);
+            if (ifIn) {
+                //麻将是否弹出
+                if(rectArray[i].isUp){
+
+                }else{
+                    rectArray[i].up();
+                    for(let j = 0; j < rectArray.length; j++){
+                        if(rectArray[j].isUp&&j!=i){
+                            rectArray[j].down();
+                        }
+                    }
+                }
+            }
+        }
+        c.onmouseup = function () {
+            c.onmousemove = null;
+            c.onmouseup = null;
+        }
+    };
 </script>
 
 </html>

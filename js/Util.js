@@ -8,8 +8,21 @@ var U = {
         o.y = y;
         o.width=width;
         o.height=height;
+        o.isUp=false;
         o.clear=function(){
             o.context.clearRect(o.x-1, o.y-1, o.width+2, o.height+2);
+        }
+        o.up=function(){
+            o.isUp=true;
+            o.clear();
+            o.y=o.y-20;
+            o.context.strokeRect(x, o.y, width, height);
+        }
+        o.down=function(){
+            o.isUp=false;
+            o.clear();
+            o.y=o.y+20;
+            o.context.strokeRect(x, o.y, width, height);
         }
         return o;
     },
