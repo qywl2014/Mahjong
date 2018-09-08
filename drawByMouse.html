@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+
+<head></head>
+
+<body>
+    <canvas id="myCanvas" style="border:1px solid #d3d3d3;"></canvas>
+</body>
+<script>
+    let c = document.getElementById("myCanvas");
+    let context = c.getContext("2d");
+    c.onmousedown = function (ev) {
+        var ev = ev || window.event;
+        context.moveTo(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop);
+        document.onmousemove = function (ev) {
+            var ev = ev || window.event;
+            context.lineTo(ev.clientX - c.offsetLeft, ev.clientY - c.offsetTop);
+            context.stroke();
+        };
+        document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        };
+    };
+</script>
+
+</html>
