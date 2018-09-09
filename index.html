@@ -5,7 +5,7 @@
     <!-- 使用了application这种应用模式后，页面讲默认全屏，禁止长按菜单，禁止收拾，标准排版，以及强制图片显示 -->
     <meta name="browsermode" content="application" />
     <!-- 设置no后用户缩放与标准浏览器缩放一直，设置为yes后，用户缩放金放到图片和文字，不出现横向滚动条 -->
-    <meta name="viewport" content="uc-fitscreen=yes"/>
+    <meta name="viewport" content="uc-fitscreen=yes" />
     <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
     <!-- <meta name="full-screen" content="yes"> -->
     <!-- 设置屏幕方向为横屏还是竖屏content="portrait|landscape" -->
@@ -54,17 +54,24 @@
         c.height = window.innerHeight;
         let context = c.getContext("2d");
         U.setContext(context);
+
         window.rectArray = new Array();
-        window.rectArrayFront=new Array();
-        window.rectArrayLeft=new Array();
-        window.rectArrayRight=new Array();
+        window.rectArrayFront = new Array();
+        window.rectArrayLeft = new Array();
+        window.rectArrayRight = new Array();
         other();
         let xInit = 10;
         let yInit = c.height - 100;
-        for (let i = 0; i < 13; i++) {
-            let r = U.strokeRect(xInit, yInit, 60, 70);
-            xInit = xInit + 65;
-            rectArray.push(r);
+        let img = new Image();
+        img.src = "img/Mahjong.jpg";
+        img.onload = function () {
+            let w = 38;
+            let h = 49;
+            for (let i = 0; i < 13; i++) {
+                let r = U.drawImage(img, 13, 5, w, h, xInit, yInit, 60, 70);
+                xInit = xInit + 65;
+                rectArray.push(r);
+            }
         }
         document.addEventListener('touchstart', function (e) {
             var e1 = e || event;
@@ -91,9 +98,6 @@
                 }
             }
         });
-        document.addEventListener("touchmove", function (e) {
-            e.preventDefault();
-        }, false)
     }
 
     function fullscreen() {
@@ -108,25 +112,33 @@
             element.msRequestFullscreen();
         }
     }
-    function other(){
-        let xInitFront=200;
-        for (let i = 0; i < 13; i++) {
-            let r = U.strokeRect(xInitFront, 10, 40, 50);
-            xInitFront = xInitFront + 45;
-            rectArrayFront.push(r);
+    function other() {
+        let img = new Image();
+        img.src = "img/shu.jpg";
+        img.onload = function () {
+            let xInitFront = 200;
+            for (let i = 0; i < 13; i++) {
+                let r = U.drawImage(img, 522, 13, 132, 162, xInitFront, 10, 40, 50);
+                xInitFront = xInitFront + 45;
+                rectArrayFront.push(r);
+            }
         }
-        let yInitLeft=10;
-        for (let i = 0; i < 13; i++) {
-            let r = U.strokeRect(10, yInitLeft, 30, 25);
-            yInitLeft = yInitLeft + 28;
-            rectArrayLeft.push(r);
-        }
-        let yInitRight=10;
-        let xInitRight = c.width - 50;
-        for (let i = 0; i < 13; i++) {
-            let r = U.strokeRect(xInitRight, yInitRight, 30, 25);
-            yInitRight = yInitRight + 28;
-            rectArrayLeft.push(r);
+
+        let imgH = new Image();
+        imgH.src = "img/heng.jpg";
+        imgH.onload = function () {
+            let yInitLeft = 10;
+            for (let i = 0; i < 13; i++) {
+                let r = U.drawImage(imgH, 238, 527, 165, 125, 10, yInitLeft, 20, 17);
+                yInitLeft = yInitLeft + 20;
+                rectArrayLeft.push(r);
+            }
+            let yInitRight = 10;
+            for (let i = 0; i < 13; i++) {
+                let r = U.drawImage(imgH, 238, 527, 165, 125, c.width - 50, yInitRight, 20, 17);
+                yInitRight = yInitRight + 20;
+                rectArrayLeft.push(r);
+            }
         }
     }
 </script>
