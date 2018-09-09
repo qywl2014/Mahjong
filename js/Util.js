@@ -28,5 +28,20 @@ var U = {
     },
     setContext: function (context) {
         this.context = context;
+    },
+    drawImage:function(img,sx,sy,swidth,sheight,x,y,width,height){
+        let o=new Object();
+        o.context=this.context;
+        o.context.drawImage(img,sx,sy,swidth,sheight,x,y,width,heigh);
+        o.img=img;
+        o.sx=sx;
+        o.sy=sy;
+        o.swidth=swidth;
+        o.sheight=sheight;
+        o.x=x;
+        o.y=y;
+        o.width=width;
+        o.height=height;
     }
+    
 }

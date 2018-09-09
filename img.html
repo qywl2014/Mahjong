@@ -1,0 +1,23 @@
+<!DOCTYPE>
+<html>
+
+<head></head>
+
+<body>
+    <canvas id="myCanvas" width="1000px" height="500px"  style="border:1px solid #d3d3d3;"></canvas>
+</body>
+<script>
+    let c = document.getElementById("myCanvas");
+    let context = c.getContext("2d");
+    // context.fillRect(0,0,100,100);
+    let img=new Image();
+    img.src="img/Mahjong.jpg";
+    img.onload=function(){
+        let w=38;
+        let h=49;
+        context.drawImage(img,13,5,w,h,100,100,w,h);
+    }
+    
+</script>
+
+</html>
